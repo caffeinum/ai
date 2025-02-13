@@ -383,6 +383,11 @@ A function that attempts to repair a tool call that failed to parse.
                     'ai.usage.promptTokens': result.usage.promptTokens,
                     'ai.usage.completionTokens': result.usage.completionTokens,
 
+                    // provider-specific metadata:
+                    'ai.provider.metadata': JSON.stringify(
+                      result.providerMetadata,
+                    ),
+
                     // standardized gen-ai llm span attributes:
                     'gen_ai.response.finish_reasons': [result.finishReason],
                     'gen_ai.response.id': responseData.id,
@@ -546,6 +551,11 @@ A function that attempts to repair a tool call that failed to parse.
             'ai.usage.promptTokens': currentModelResponse.usage.promptTokens,
             'ai.usage.completionTokens':
               currentModelResponse.usage.completionTokens,
+
+            // provider-specific metadata:
+            'ai.provider.metadata': JSON.stringify(
+              currentModelResponse.providerMetadata,
+            ),
           },
         }),
       );
