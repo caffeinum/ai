@@ -2,15 +2,22 @@ import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 import { createXai } from './xai-provider';
 import { loadApiKey } from '@ai-sdk/provider-utils';
 import { OpenAICompatibleChatLanguageModel } from '@ai-sdk/openai-compatible';
+import { OpenAICompatibleImageModel } from '@ai-sdk/openai-compatible';
 
-// Add type assertion for the mocked class
 const OpenAICompatibleChatLanguageModelMock =
   OpenAICompatibleChatLanguageModel as unknown as Mock;
+const OpenAICompatibleImageModelMock =
+  OpenAICompatibleImageModel as unknown as Mock;
 
 vi.mock('@ai-sdk/openai-compatible', () => ({
   OpenAICompatibleChatLanguageModel: vi.fn(),
   OpenAICompatibleCompletionLanguageModel: vi.fn(),
   OpenAICompatibleEmbeddingModel: vi.fn(),
+  OpenAICompatibleImageModel: vi.fn(),
+}));
+
+vi.mock('./xai-image-model', () => ({
+  XaiImageModel: vi.fn(),
 }));
 
 vi.mock('@ai-sdk/provider-utils', () => ({
@@ -80,6 +87,58 @@ describe('xAIProvider', () => {
       const model = provider.chat(modelId, settings);
 
       expect(model).toBeInstanceOf(OpenAICompatibleChatLanguageModel);
+    });
+  });
+
+  describe('imageModel', () => {
+    it('should construct an image model with correct configuration', () => {
+      const provider = createXai();
+      const modelId = 'grok-2-image';
+      const settings = { maxImagesPerCall: 3 };
+
+      const model = provider.imageModel(modelId, settings);
+
+      expect(model).toBeInstanceOf(OpenAICompatibleImageModel);
+
+      const constructorCall = OpenAICompatibleImageModelMock.mock.calls[0];
+      expect(constructorCall[0]).toBe(modelId);
+      expect(constructorCall[1]).toEqual(settings);
+
+      const config = constructorCall[2];
+      expect(config.provider).toBe('xai.image');
+      expect(config.url({ path: '/test-path' })).toBe(
+        'https://api.x.ai/v1/test-path',
+      );
+    });
+
+    it('should use custom baseURL for image model', () => {
+      const customBaseURL = 'https://custom.xai.api';
+      const provider = createXai({ baseURL: customBaseURL });
+      const modelId = 'grok-2-image';
+
+      provider.imageModel(modelId);
+
+      const constructorCall = OpenAICompatibleImageModelMock.mock.calls[0];
+      const config = constructorCall[2];
+      expect(config.url({ path: '/test-path' })).toBe(
+        `${customBaseURL}/test-path`,
+      );
+    });
+
+    it('should pass custom headers to image model', () => {
+      const customHeaders = { 'Custom-Header': 'test-value' };
+      const provider = createXai({ headers: customHeaders });
+
+      provider.imageModel('grok-2-image');
+
+      const constructorCall = OpenAICompatibleImageModelMock.mock.calls[0];
+      const config = constructorCall[2];
+      const headers = config.headers();
+
+      expect(headers).toMatchObject({
+        Authorization: 'Bearer mock-api-key',
+        'Custom-Header': 'test-value',
+      });
     });
   });
 });

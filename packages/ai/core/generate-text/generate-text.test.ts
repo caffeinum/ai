@@ -37,6 +37,42 @@ const modelWithSources = new MockLanguageModelV1({
         providerMetadata: { provider: { custom: 'value2' } },
       },
     ],
+    text: 'Hello, world!',
+  }),
+});
+
+const modelWithFiles = new MockLanguageModelV1({
+  doGenerate: async () => ({
+    ...dummyResponseValues,
+    files: [
+      {
+        data: new Uint8Array([1, 2, 3]),
+        mimeType: 'image/png',
+      },
+      {
+        data: 'QkFVRw==',
+        mimeType: 'image/jpeg',
+      },
+    ],
+    text: 'Hello, world!',
+  }),
+});
+
+const modelWithReasoning = new MockLanguageModelV1({
+  doGenerate: async () => ({
+    ...dummyResponseValues,
+    reasoning: [
+      {
+        type: 'text',
+        text: 'I will open the conversation with witty banter.',
+        signature: 'signature',
+      },
+      {
+        type: 'redacted',
+        data: 'redacted-reasoning-data',
+      },
+    ],
+    text: 'Hello, world!',
   }),
 });
 
@@ -73,15 +109,9 @@ describe('result.text', () => {
 });
 
 describe('result.reasoning', () => {
-  it('should contain reasoning from model response', async () => {
+  it('should contain reasoning string from model response', async () => {
     const result = await generateText({
-      model: new MockLanguageModelV1({
-        doGenerate: async () => ({
-          ...dummyResponseValues,
-          text: 'Hello, world!',
-          reasoning: 'I will open the conversation with witty banter.',
-        }),
-      }),
+      model: modelWithReasoning,
       prompt: 'prompt',
     });
 
@@ -102,16 +132,21 @@ describe('result.sources', () => {
   });
 });
 
+describe('result.files', () => {
+  it('should contain files', async () => {
+    const result = await generateText({
+      model: modelWithFiles,
+      prompt: 'prompt',
+    });
+
+    expect(result.files).toMatchSnapshot();
+  });
+});
+
 describe('result.steps', () => {
   it('should add the reasoning from the model response to the step result', async () => {
     const result = await generateText({
-      model: new MockLanguageModelV1({
-        doGenerate: async () => ({
-          ...dummyResponseValues,
-          text: 'Hello, world!',
-          reasoning: 'I will open the conversation with witty banter.',
-        }),
-      }),
+      model: modelWithReasoning,
       prompt: 'prompt',
       experimental_generateMessageId: mockId({
         prefix: 'msg',
@@ -128,6 +163,20 @@ describe('result.steps', () => {
   it('should contain sources', async () => {
     const result = await generateText({
       model: modelWithSources,
+      prompt: 'prompt',
+      experimental_generateMessageId: mockId({ prefix: 'msg' }),
+      _internal: {
+        generateId: mockId({ prefix: 'id' }),
+        currentDate: () => new Date(0),
+      },
+    });
+
+    expect(result.steps).toMatchSnapshot();
+  });
+
+  it('should contain files', async () => {
+    const result = await generateText({
+      model: modelWithFiles,
       prompt: 'prompt',
       experimental_generateMessageId: mockId({ prefix: 'msg' }),
       _internal: {
@@ -384,10 +433,20 @@ describe('result.response.messages', () => {
 
     expect(result.response.messages).toMatchSnapshot();
   });
+
+  it('should contain reasoning', async () => {
+    const result = await generateText({
+      model: modelWithReasoning,
+      prompt: 'test-input',
+      experimental_generateMessageId: mockId({ prefix: 'msg' }),
+    });
+
+    expect(result.response.messages).toMatchSnapshot();
+  });
 });
 
 describe('result.request', () => {
-  it('should contain request information', async () => {
+  it('should contain request body', async () => {
     const result = await generateText({
       model: new MockLanguageModelV1({
         doGenerate: async ({}) => ({
@@ -408,7 +467,7 @@ describe('result.request', () => {
 });
 
 describe('result.response', () => {
-  it('should contain response information', async () => {
+  it('should contain response body and headers', async () => {
     const result = await generateText({
       model: new MockLanguageModelV1({
         doGenerate: async ({}) => ({
@@ -423,6 +482,7 @@ describe('result.response', () => {
             headers: {
               'custom-response-header': 'response-header-value',
             },
+            body: 'test body',
           },
         }),
       }),
@@ -430,6 +490,7 @@ describe('result.response', () => {
       experimental_generateMessageId: mockId({ prefix: 'msg' }),
     });
 
+    expect(result.steps[0].response).toMatchSnapshot();
     expect(result.response).toMatchSnapshot();
   });
 });
@@ -714,6 +775,13 @@ describe('options.maxSteps', () => {
                       providerMetadata: { provider: { custom: 'value' } },
                     },
                   ],
+                  files: [
+                    {
+                      data: new Uint8Array([1, 2, 3]),
+                      mimeType: 'image/png',
+                      filename: 'test.png',
+                    },
+                  ],
                   usage: { completionTokens: 5, promptTokens: 30 },
                   // test handling of custom response headers:
                   rawResponse: {
@@ -823,6 +891,13 @@ describe('options.maxSteps', () => {
                   // (for models such as Anthropic that trim trailing whitespace in their inputs):
                   text: '  final value keep all whitespace\n end',
                   finishReason: 'stop',
+                  files: [
+                    {
+                      data: 'QkFVRw==',
+                      mimeType: 'image/jpeg',
+                      filename: 'test.jpeg',
+                    },
+                  ],
                   response: {
                     id: 'test-id-4-from-model',
                     timestamp: new Date(20000),
@@ -897,6 +972,10 @@ describe('options.maxSteps', () => {
 
     it('result.sources should contain sources from all steps', () => {
       expect(result.sources).toMatchSnapshot();
+    });
+
+    it('result.files should contain files from last step', () => {
+      expect(result.files).toMatchSnapshot();
     });
   });
 });

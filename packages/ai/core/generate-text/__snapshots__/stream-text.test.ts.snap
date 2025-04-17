@@ -87,10 +87,12 @@ exports[`streamText > multiple stream consumption > should support text stream, 
 exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbacks > onFinish should send correct information 1`] = `
 {
   "experimental_providerMetadata": undefined,
+  "files": [],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": undefined,
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": {
@@ -101,8 +103,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
       {
         "content": [
           {
-            "text": "",
-            "type": "text",
+            "text": "thinking",
+            "type": "reasoning",
           },
           {
             "args": {
@@ -146,11 +148,18 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
   "steps": [
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "tool-calls",
       "isContinued": false,
       "logprobs": undefined,
       "providerMetadata": undefined,
-      "reasoning": undefined,
+      "reasoning": "thinking",
+      "reasoningDetails": [
+        {
+          "text": "thinking",
+          "type": "text",
+        },
+      ],
       "request": {},
       "response": {
         "headers": {
@@ -161,8 +170,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
           {
             "content": [
               {
-                "text": "",
-                "type": "text",
+                "text": "thinking",
+                "type": "reasoning",
               },
               {
                 "args": {
@@ -225,11 +234,13 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
     },
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": {
@@ -240,8 +251,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
           {
             "content": [
               {
-                "text": "",
-                "type": "text",
+                "text": "thinking",
+                "type": "reasoning",
               },
               {
                 "args": {
@@ -310,11 +321,18 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "tool-calls",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
-    "reasoning": undefined,
+    "reasoning": "thinking",
+    "reasoningDetails": [
+      {
+        "text": "thinking",
+        "type": "text",
+      },
+    ],
     "request": {},
     "response": {
       "headers": {
@@ -325,8 +343,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
         {
           "content": [
             {
-              "text": "",
-              "type": "text",
+              "text": "thinking",
+              "type": "reasoning",
             },
             {
               "args": {
@@ -389,11 +407,13 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -404,8 +424,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > callbac
         {
           "content": [
             {
-              "text": "",
-              "type": "text",
+              "text": "thinking",
+              "type": "reasoning",
             },
             {
               "args": {
@@ -467,6 +487,10 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > should 
     "request": {},
     "type": "step-start",
     "warnings": [],
+  },
+  {
+    "textDelta": "thinking",
+    "type": "reasoning",
   },
   {
     "args": {
@@ -655,7 +679,7 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > should 
       "ai.model.provider": "mock-provider",
       "ai.operationId": "ai.streamText.doStream",
       "ai.prompt.format": "messages",
-      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"tool-call","toolCallId":"call-1","toolName":"tool1","args":{"value":"value"}}]},{"role":"tool","content":[{"type":"tool-result","toolCallId":"call-1","toolName":"tool1","result":"result1"}]}]",
+      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"reasoning","text":"thinking"},{"type":"tool-call","toolCallId":"call-1","toolName":"tool1","args":{"value":"value"}}]},{"role":"tool","content":[{"type":"tool-result","toolCallId":"call-1","toolName":"tool1","result":"result1"}]}]",
       "ai.prompt.toolChoice": "{"type":"auto"}",
       "ai.prompt.tools": [
         "{"type":"function","name":"tool1","parameters":{"type":"object","properties":{"value":{"type":"string"}},"required":["value"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}}",
@@ -704,8 +728,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
   {
     "content": [
       {
-        "text": "",
-        "type": "text",
+        "text": "thinking",
+        "type": "reasoning",
       },
       {
         "args": {
@@ -748,11 +772,18 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "tool-calls",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
-    "reasoning": undefined,
+    "reasoning": "thinking",
+    "reasoningDetails": [
+      {
+        "text": "thinking",
+        "type": "text",
+      },
+    ],
     "request": {},
     "response": {
       "headers": {
@@ -763,8 +794,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
         {
           "content": [
             {
-              "text": "",
-              "type": "text",
+              "text": "thinking",
+              "type": "reasoning",
             },
             {
               "args": {
@@ -827,11 +858,13 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -842,8 +875,8 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
         {
           "content": [
             {
-              "text": "",
-              "type": "text",
+              "text": "thinking",
+              "type": "reasoning",
             },
             {
               "args": {
@@ -901,10 +934,12 @@ exports[`streamText > options.maxSteps > 2 steps: initial, tool-result > value p
 exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, continue > callbacks > onFinish should send correct information 1`] = `
 {
   "experimental_providerMetadata": undefined,
+  "files": [],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": undefined,
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": {
@@ -932,11 +967,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   "steps": [
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "length",
       "isContinued": true,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": undefined,
@@ -972,11 +1009,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
     },
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "length",
       "isContinued": true,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": undefined,
@@ -1023,11 +1062,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
     },
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "length",
       "isContinued": true,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": {
@@ -1087,11 +1128,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
     },
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": {
@@ -1147,11 +1190,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -1187,11 +1232,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -1238,11 +1285,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -1302,11 +1351,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -1760,7 +1811,7 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
       "ai.model.provider": "mock-provider",
       "ai.operationId": "ai.streamText.doStream",
       "ai.prompt.format": "messages",
-      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"text","text":"part 1 \\n "},{"text":"no-whitespace","type":"text"}]}]",
+      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"text","text":"part 1 \\n "},{"type":"text","text":"no-whitespace"}]}]",
       "ai.response.avgCompletionTokensPerSecond": Infinity,
       "ai.response.finishReason": "length",
       "ai.response.id": "id-2",
@@ -1803,7 +1854,7 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
       "ai.model.provider": "mock-provider",
       "ai.operationId": "ai.streamText.doStream",
       "ai.prompt.format": "messages",
-      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"text","text":"part 1 \\n "},{"text":"no-whitespace","type":"text"},{"text":"immediatefollow  ","type":"text"}]}]",
+      "ai.prompt.messages": "[{"role":"user","content":[{"type":"text","text":"test-input"}]},{"role":"assistant","content":[{"type":"text","text":"part 1 \\n "},{"type":"text","text":"no-whitespace"},{"type":"text","text":"immediatefollow  "}]}]",
       "ai.response.avgCompletionTokensPerSecond": Infinity,
       "ai.response.finishReason": "stop",
       "ai.response.id": "id-3",
@@ -1848,11 +1899,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -1888,11 +1941,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -1939,11 +1994,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "length",
     "isContinued": true,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -2003,11 +2060,13 @@ exports[`streamText > options.maxSteps > 4 steps: initial, continue, continue, c
   },
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": {
@@ -2125,6 +2184,7 @@ exports[`streamText > options.onFinish > should send correct information 1`] = `
       "testKey": "testValue",
     },
   },
+  "files": [],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": {
@@ -2133,6 +2193,7 @@ exports[`streamText > options.onFinish > should send correct information 1`] = `
     },
   },
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": {
@@ -2182,6 +2243,7 @@ exports[`streamText > options.onFinish > should send correct information 1`] = `
           "testKey": "testValue",
         },
       },
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
@@ -2191,6 +2253,7 @@ exports[`streamText > options.onFinish > should send correct information 1`] = `
         },
       },
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": {
@@ -2295,13 +2358,144 @@ exports[`streamText > options.onFinish > should send correct information 1`] = `
 }
 `;
 
-exports[`streamText > options.onFinish > should send sources 1`] = `
+exports[`streamText > options.onFinish > should send files 1`] = `
 {
   "experimental_providerMetadata": undefined,
+  "files": [
+    DefaultGeneratedFileWithType {
+      "base64Data": "Hello World",
+      "mimeType": "text/plain",
+      "type": "file",
+      "uint8ArrayData": undefined,
+    },
+    DefaultGeneratedFileWithType {
+      "base64Data": "QkFVRw==",
+      "mimeType": "image/jpeg",
+      "type": "file",
+      "uint8ArrayData": undefined,
+    },
+  ],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": undefined,
   "reasoning": undefined,
+  "reasoningDetails": [],
+  "request": {},
+  "response": {
+    "headers": undefined,
+    "id": "id-1",
+    "messages": [
+      {
+        "content": [
+          {
+            "data": "Hello World",
+            "mimeType": "text/plain",
+            "type": "file",
+          },
+          {
+            "data": "QkFVRw==",
+            "mimeType": "image/jpeg",
+            "type": "file",
+          },
+          {
+            "text": "Hello!",
+            "type": "text",
+          },
+        ],
+        "id": "msg-0",
+        "role": "assistant",
+      },
+    ],
+    "modelId": "mock-model-id",
+    "timestamp": 1970-01-01T00:00:00.000Z,
+  },
+  "sources": [],
+  "steps": [
+    {
+      "experimental_providerMetadata": undefined,
+      "files": [
+        DefaultGeneratedFileWithType {
+          "base64Data": "Hello World",
+          "mimeType": "text/plain",
+          "type": "file",
+          "uint8ArrayData": undefined,
+        },
+        DefaultGeneratedFileWithType {
+          "base64Data": "QkFVRw==",
+          "mimeType": "image/jpeg",
+          "type": "file",
+          "uint8ArrayData": undefined,
+        },
+      ],
+      "finishReason": "stop",
+      "isContinued": false,
+      "logprobs": undefined,
+      "providerMetadata": undefined,
+      "reasoning": undefined,
+      "reasoningDetails": [],
+      "request": {},
+      "response": {
+        "headers": undefined,
+        "id": "id-1",
+        "messages": [
+          {
+            "content": [
+              {
+                "data": "Hello World",
+                "mimeType": "text/plain",
+                "type": "file",
+              },
+              {
+                "data": "QkFVRw==",
+                "mimeType": "image/jpeg",
+                "type": "file",
+              },
+              {
+                "text": "Hello!",
+                "type": "text",
+              },
+            ],
+            "id": "msg-0",
+            "role": "assistant",
+          },
+        ],
+        "modelId": "mock-model-id",
+        "timestamp": 1970-01-01T00:00:00.000Z,
+      },
+      "sources": [],
+      "stepType": "initial",
+      "text": "Hello!",
+      "toolCalls": [],
+      "toolResults": [],
+      "usage": {
+        "completionTokens": 10,
+        "promptTokens": 3,
+        "totalTokens": 13,
+      },
+      "warnings": undefined,
+    },
+  ],
+  "text": "Hello!",
+  "toolCalls": [],
+  "toolResults": [],
+  "usage": {
+    "completionTokens": 10,
+    "promptTokens": 3,
+    "totalTokens": 13,
+  },
+  "warnings": undefined,
+}
+`;
+
+exports[`streamText > options.onFinish > should send sources 1`] = `
+{
+  "experimental_providerMetadata": undefined,
+  "files": [],
+  "finishReason": "stop",
+  "logprobs": undefined,
+  "providerMetadata": undefined,
+  "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": undefined,
@@ -2348,11 +2542,13 @@ exports[`streamText > options.onFinish > should send sources 1`] = `
   "steps": [
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": undefined,
@@ -2423,10 +2619,12 @@ exports[`streamText > options.onFinish > should send sources 1`] = `
 exports[`streamText > options.output > object output > should call onFinish with the correct content 1`] = `
 {
   "experimental_providerMetadata": undefined,
+  "files": [],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": undefined,
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": undefined,
@@ -2450,11 +2648,13 @@ exports[`streamText > options.output > object output > should call onFinish with
   "steps": [
     {
       "experimental_providerMetadata": undefined,
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
       "providerMetadata": undefined,
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": undefined,
@@ -2506,6 +2706,7 @@ exports[`streamText > options.transform > with base transformation > options.onF
       "testKey": "TEST VALUE",
     },
   },
+  "files": [],
   "finishReason": "stop",
   "logprobs": undefined,
   "providerMetadata": {
@@ -2514,6 +2715,7 @@ exports[`streamText > options.transform > with base transformation > options.onF
     },
   },
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": {
@@ -2563,6 +2765,7 @@ exports[`streamText > options.transform > with base transformation > options.onF
           "testKey": "TEST VALUE",
         },
       },
+      "files": [],
       "finishReason": "stop",
       "isContinued": false,
       "logprobs": undefined,
@@ -2572,6 +2775,7 @@ exports[`streamText > options.transform > with base transformation > options.onF
         },
       },
       "reasoning": undefined,
+      "reasoningDetails": [],
       "request": {},
       "response": {
         "headers": {
@@ -2683,6 +2887,7 @@ exports[`streamText > options.transform > with base transformation > options.onS
       "testKey": "TEST VALUE",
     },
   },
+  "files": [],
   "finishReason": "stop",
   "isContinued": false,
   "logprobs": undefined,
@@ -2692,6 +2897,7 @@ exports[`streamText > options.transform > with base transformation > options.onS
     },
   },
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "headers": {
@@ -2770,11 +2976,13 @@ exports[`streamText > options.transform > with base transformation > result.step
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -2934,11 +3142,13 @@ exports[`streamText > options.transform > with base transformation > telemetry s
 exports[`streamText > options.transform > with transformation that aborts stream > options.onStepFinish should be called 1`] = `
 {
   "experimental_providerMetadata": undefined,
+  "files": [],
   "finishReason": "stop",
   "isContinued": false,
   "logprobs": undefined,
   "providerMetadata": undefined,
   "reasoning": undefined,
+  "reasoningDetails": [],
   "request": {},
   "response": {
     "id": "response-id",
@@ -2969,6 +3179,23 @@ exports[`streamText > options.transform > with transformation that aborts stream
   },
   "warnings": [],
 }
+`;
+
+exports[`streamText > result.files > should contain files 1`] = `
+[
+  DefaultGeneratedFileWithType {
+    "base64Data": "Hello World",
+    "mimeType": "text/plain",
+    "type": "file",
+    "uint8ArrayData": undefined,
+  },
+  DefaultGeneratedFileWithType {
+    "base64Data": "QkFVRw==",
+    "mimeType": "image/jpeg",
+    "type": "file",
+    "uint8ArrayData": undefined,
+  },
+]
 `;
 
 exports[`streamText > result.fullStream > should filter out empty text deltas 1`] = `
@@ -3023,164 +3250,6 @@ exports[`streamText > result.fullStream > should filter out empty text deltas 1`
       "id": "id-0",
       "modelId": "mock-model-id",
       "timestamp": 1970-01-01T00:00:00.000Z,
-    },
-    "type": "finish",
-    "usage": {
-      "completionTokens": 10,
-      "promptTokens": 3,
-      "totalTokens": 13,
-    },
-  },
-]
-`;
-
-exports[`streamText > result.fullStream > should include reasoning content in fullStream 1`] = `
-[
-  {
-    "messageId": "msg-0",
-    "request": {},
-    "type": "step-start",
-    "warnings": [],
-  },
-  {
-    "textDelta": "I will open the conversation",
-    "type": "reasoning",
-  },
-  {
-    "textDelta": " with witty banter. ",
-    "type": "reasoning",
-  },
-  {
-    "textDelta": "Once the user has relaxed,",
-    "type": "reasoning",
-  },
-  {
-    "textDelta": " I will pry for valuable information.",
-    "type": "reasoning",
-  },
-  {
-    "textDelta": "Hi",
-    "type": "text-delta",
-  },
-  {
-    "textDelta": " there!",
-    "type": "text-delta",
-  },
-  {
-    "experimental_providerMetadata": undefined,
-    "finishReason": "stop",
-    "isContinued": false,
-    "logprobs": undefined,
-    "messageId": "msg-0",
-    "providerMetadata": undefined,
-    "request": {},
-    "response": {
-      "headers": undefined,
-      "id": "id-0",
-      "modelId": "mock-model-id",
-      "timestamp": 1970-01-01T00:00:00.000Z,
-    },
-    "type": "step-finish",
-    "usage": {
-      "completionTokens": 10,
-      "promptTokens": 3,
-      "totalTokens": 13,
-    },
-    "warnings": undefined,
-  },
-  {
-    "experimental_providerMetadata": undefined,
-    "finishReason": "stop",
-    "logprobs": undefined,
-    "providerMetadata": undefined,
-    "response": {
-      "headers": undefined,
-      "id": "id-0",
-      "modelId": "mock-model-id",
-      "timestamp": 1970-01-01T00:00:00.000Z,
-    },
-    "type": "finish",
-    "usage": {
-      "completionTokens": 10,
-      "promptTokens": 3,
-      "totalTokens": 13,
-    },
-  },
-]
-`;
-
-exports[`streamText > result.fullStream > should include sources in fullStream 1`] = `
-[
-  {
-    "messageId": "msg-0",
-    "request": {},
-    "type": "step-start",
-    "warnings": [],
-  },
-  {
-    "source": {
-      "id": "123",
-      "providerMetadata": {
-        "provider": {
-          "custom": "value",
-        },
-      },
-      "sourceType": "url",
-      "title": "Example",
-      "url": "https://example.com",
-    },
-    "type": "source",
-  },
-  {
-    "textDelta": "Hello!",
-    "type": "text-delta",
-  },
-  {
-    "source": {
-      "id": "456",
-      "providerMetadata": {
-        "provider": {
-          "custom": "value2",
-        },
-      },
-      "sourceType": "url",
-      "title": "Example 2",
-      "url": "https://example.com/2",
-    },
-    "type": "source",
-  },
-  {
-    "experimental_providerMetadata": undefined,
-    "finishReason": "stop",
-    "isContinued": false,
-    "logprobs": undefined,
-    "messageId": "msg-0",
-    "providerMetadata": undefined,
-    "request": {},
-    "response": {
-      "headers": undefined,
-      "id": "id-2000",
-      "modelId": "mock-model-id",
-      "timestamp": 1970-01-01T00:00:02.000Z,
-    },
-    "type": "step-finish",
-    "usage": {
-      "completionTokens": 10,
-      "promptTokens": 3,
-      "totalTokens": 13,
-    },
-    "warnings": undefined,
-  },
-  {
-    "experimental_providerMetadata": undefined,
-    "finishReason": "stop",
-    "logprobs": undefined,
-    "providerMetadata": undefined,
-    "response": {
-      "headers": undefined,
-      "id": "id-2000",
-      "modelId": "mock-model-id",
-      "timestamp": 1970-01-01T00:00:02.000Z,
     },
     "type": "finish",
     "usage": {
@@ -3306,6 +3375,243 @@ exports[`streamText > result.fullStream > should send delayed asynchronous tool 
     "response": {
       "headers": undefined,
       "id": "id-0",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+  },
+]
+`;
+
+exports[`streamText > result.fullStream > should send files 1`] = `
+[
+  {
+    "messageId": "msg-0",
+    "request": {},
+    "type": "step-start",
+    "warnings": [],
+  },
+  DefaultGeneratedFileWithType {
+    "base64Data": "Hello World",
+    "mimeType": "text/plain",
+    "type": "file",
+    "uint8ArrayData": undefined,
+  },
+  {
+    "textDelta": "Hello!",
+    "type": "text-delta",
+  },
+  DefaultGeneratedFileWithType {
+    "base64Data": "QkFVRw==",
+    "mimeType": "image/jpeg",
+    "type": "file",
+    "uint8ArrayData": undefined,
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "isContinued": false,
+    "logprobs": undefined,
+    "messageId": "msg-0",
+    "providerMetadata": undefined,
+    "request": {},
+    "response": {
+      "headers": undefined,
+      "id": "id-1",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "step-finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+    "warnings": undefined,
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "logprobs": undefined,
+    "providerMetadata": undefined,
+    "response": {
+      "headers": undefined,
+      "id": "id-1",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+  },
+]
+`;
+
+exports[`streamText > result.fullStream > should send reasoning deltas 1`] = `
+[
+  {
+    "messageId": "msg-0",
+    "request": {},
+    "type": "step-start",
+    "warnings": [],
+  },
+  {
+    "textDelta": "I will open the conversation",
+    "type": "reasoning",
+  },
+  {
+    "textDelta": " with witty banter. ",
+    "type": "reasoning",
+  },
+  {
+    "signature": "1234567890",
+    "type": "reasoning-signature",
+  },
+  {
+    "data": "redacted-reasoning-data",
+    "type": "redacted-reasoning",
+  },
+  {
+    "textDelta": "Once the user has relaxed,",
+    "type": "reasoning",
+  },
+  {
+    "textDelta": " I will pry for valuable information.",
+    "type": "reasoning",
+  },
+  {
+    "signature": "1234567890",
+    "type": "reasoning-signature",
+  },
+  {
+    "textDelta": "Hi",
+    "type": "text-delta",
+  },
+  {
+    "textDelta": " there!",
+    "type": "text-delta",
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "isContinued": false,
+    "logprobs": undefined,
+    "messageId": "msg-0",
+    "providerMetadata": undefined,
+    "request": {},
+    "response": {
+      "headers": undefined,
+      "id": "id-0",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "step-finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+    "warnings": undefined,
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "logprobs": undefined,
+    "providerMetadata": undefined,
+    "response": {
+      "headers": undefined,
+      "id": "id-0",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+  },
+]
+`;
+
+exports[`streamText > result.fullStream > should send sources 1`] = `
+[
+  {
+    "messageId": "msg-0",
+    "request": {},
+    "type": "step-start",
+    "warnings": [],
+  },
+  {
+    "source": {
+      "id": "123",
+      "providerMetadata": {
+        "provider": {
+          "custom": "value",
+        },
+      },
+      "sourceType": "url",
+      "title": "Example",
+      "url": "https://example.com",
+    },
+    "type": "source",
+  },
+  {
+    "textDelta": "Hello!",
+    "type": "text-delta",
+  },
+  {
+    "source": {
+      "id": "456",
+      "providerMetadata": {
+        "provider": {
+          "custom": "value2",
+        },
+      },
+      "sourceType": "url",
+      "title": "Example 2",
+      "url": "https://example.com/2",
+    },
+    "type": "source",
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "isContinued": false,
+    "logprobs": undefined,
+    "messageId": "msg-0",
+    "providerMetadata": undefined,
+    "request": {},
+    "response": {
+      "headers": undefined,
+      "id": "id-1",
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "type": "step-finish",
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+    "warnings": undefined,
+  },
+  {
+    "experimental_providerMetadata": undefined,
+    "finishReason": "stop",
+    "logprobs": undefined,
+    "providerMetadata": undefined,
+    "response": {
+      "headers": undefined,
+      "id": "id-1",
       "modelId": "mock-model-id",
       "timestamp": 1970-01-01T00:00:00.000Z,
     },
@@ -3738,6 +4044,17 @@ exports[`streamText > result.pipeDataStreamToResponse > should mask error messag
 ]
 `;
 
+exports[`streamText > result.pipeDataStreamToResponse > should omit message finish event (d:) when sendFinish is false 1`] = `
+[
+  "f:{"messageId":"msg-0"}
+",
+  "0:"Hello, World!"
+",
+  "e:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10},"isContinued":false}
+",
+]
+`;
+
 exports[`streamText > result.pipeDataStreamToResponse > should support custom error messages 1`] = `
 [
   "f:{"messageId":"msg-0"}
@@ -3800,6 +4117,23 @@ exports[`streamText > result.pipeDataStreamToResponse > should write data stream
 ]
 `;
 
+exports[`streamText > result.pipeDataStreamToResponse > should write file content to a Node.js response-like object 1`] = `
+[
+  "f:{"messageId":"msg-0"}
+",
+  "k:{"mimeType":"text/plain","data":"Hello World"}
+",
+  "0:"Hello!"
+",
+  "k:{"mimeType":"image/jpeg","data":"QkFVRw=="}
+",
+  "e:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10},"isContinued":false}
+",
+  "d:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10}}
+",
+]
+`;
+
 exports[`streamText > result.pipeDataStreamToResponse > should write reasoning content to a Node.js response-like object 1`] = `
 [
   "f:{"messageId":"msg-0"}
@@ -3808,9 +4142,15 @@ exports[`streamText > result.pipeDataStreamToResponse > should write reasoning c
 ",
   "g:" with witty banter. "
 ",
+  "j:{"signature":"1234567890"}
+",
+  "i:{"data":"redacted-reasoning-data"}
+",
   "g:"Once the user has relaxed,"
 ",
   "g:" I will pry for valuable information."
+",
+  "j:{"signature":"1234567890"}
 ",
   "0:"Hi"
 ",
@@ -3842,6 +4182,25 @@ exports[`streamText > result.pipeDataStreamToResponse > should write source cont
 
 exports[`streamText > result.reasoning > should contain reasoning from model response 1`] = `"I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information."`;
 
+exports[`streamText > result.reasoningDetails > should contain reasoning from model response 1`] = `
+[
+  {
+    "signature": "1234567890",
+    "text": "I will open the conversation with witty banter. ",
+    "type": "text",
+  },
+  {
+    "data": "redacted-reasoning-data",
+    "type": "redacted",
+  },
+  {
+    "signature": "1234567890",
+    "text": "Once the user has relaxed, I will pry for valuable information.",
+    "type": "text",
+  },
+]
+`;
+
 exports[`streamText > result.response > should resolve with response information 1`] = `
 {
   "headers": {
@@ -3863,6 +4222,35 @@ exports[`streamText > result.response > should resolve with response information
   "modelId": "mock-model-id",
   "timestamp": 1970-01-01T00:00:00.000Z,
 }
+`;
+
+exports[`streamText > result.response.messages > should contain reasoning 1`] = `
+[
+  {
+    "content": [
+      {
+        "signature": "1234567890",
+        "text": "I will open the conversation with witty banter. ",
+        "type": "reasoning",
+      },
+      {
+        "data": "redacted-reasoning-data",
+        "type": "redacted-reasoning",
+      },
+      {
+        "signature": "1234567890",
+        "text": "Once the user has relaxed, I will pry for valuable information.",
+        "type": "reasoning",
+      },
+      {
+        "text": "Hi there!",
+        "type": "text",
+      },
+    ],
+    "id": "msg-0",
+    "role": "assistant",
+  },
+]
 `;
 
 exports[`streamText > result.responseMessages > should contain assistant response message and tool message when there are tool calls with results 1`] = `
@@ -3942,15 +4330,100 @@ exports[`streamText > result.sources > should contain sources 1`] = `
 ]
 `;
 
+exports[`streamText > result.steps > should add the files from the model response to the step result 1`] = `
+[
+  {
+    "experimental_providerMetadata": undefined,
+    "files": [
+      DefaultGeneratedFileWithType {
+        "base64Data": "Hello World",
+        "mimeType": "text/plain",
+        "type": "file",
+        "uint8ArrayData": undefined,
+      },
+      DefaultGeneratedFileWithType {
+        "base64Data": "QkFVRw==",
+        "mimeType": "image/jpeg",
+        "type": "file",
+        "uint8ArrayData": undefined,
+      },
+    ],
+    "finishReason": "stop",
+    "isContinued": false,
+    "logprobs": undefined,
+    "providerMetadata": undefined,
+    "reasoning": undefined,
+    "reasoningDetails": [],
+    "request": {},
+    "response": {
+      "headers": undefined,
+      "id": "id-1",
+      "messages": [
+        {
+          "content": [
+            {
+              "data": "Hello World",
+              "mimeType": "text/plain",
+              "type": "file",
+            },
+            {
+              "data": "QkFVRw==",
+              "mimeType": "image/jpeg",
+              "type": "file",
+            },
+            {
+              "text": "Hello!",
+              "type": "text",
+            },
+          ],
+          "id": "msg-0",
+          "role": "assistant",
+        },
+      ],
+      "modelId": "mock-model-id",
+      "timestamp": 1970-01-01T00:00:00.000Z,
+    },
+    "sources": [],
+    "stepType": "initial",
+    "text": "Hello!",
+    "toolCalls": [],
+    "toolResults": [],
+    "usage": {
+      "completionTokens": 10,
+      "promptTokens": 3,
+      "totalTokens": 13,
+    },
+    "warnings": undefined,
+  },
+]
+`;
+
 exports[`streamText > result.steps > should add the reasoning from the model response to the step result 1`] = `
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
+    "reasoningDetails": [
+      {
+        "signature": "1234567890",
+        "text": "I will open the conversation with witty banter. ",
+        "type": "text",
+      },
+      {
+        "data": "redacted-reasoning-data",
+        "type": "redacted",
+      },
+      {
+        "signature": "1234567890",
+        "text": "Once the user has relaxed, I will pry for valuable information.",
+        "type": "text",
+      },
+    ],
     "request": {},
     "response": {
       "headers": undefined,
@@ -3958,6 +4431,20 @@ exports[`streamText > result.steps > should add the reasoning from the model res
       "messages": [
         {
           "content": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "reasoning",
+            },
+            {
+              "data": "redacted-reasoning-data",
+              "type": "redacted-reasoning",
+            },
+            {
+              "signature": "1234567890",
+              "text": "Once the user has relaxed, I will pry for valuable information.",
+              "type": "reasoning",
+            },
             {
               "text": "Hi there!",
               "type": "text",
@@ -3989,11 +4476,13 @@ exports[`streamText > result.steps > should add the sources from the model respo
 [
   {
     "experimental_providerMetadata": undefined,
+    "files": [],
     "finishReason": "stop",
     "isContinued": false,
     "logprobs": undefined,
     "providerMetadata": undefined,
     "reasoning": undefined,
+    "reasoningDetails": [],
     "request": {},
     "response": {
       "headers": undefined,
@@ -4100,6 +4589,34 @@ exports[`streamText > result.toDataStream > should mask error messages by defaul
 ]
 `;
 
+exports[`streamText > result.toDataStream > should omit message finish event (d:) when sendFinish is false 1`] = `
+[
+  "f:{"messageId":"msg-0"}
+",
+  "0:"Hello, World!"
+",
+  "e:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10},"isContinued":false}
+",
+]
+`;
+
+exports[`streamText > result.toDataStream > should send file content 1`] = `
+[
+  "f:{"messageId":"msg-0"}
+",
+  "k:{"mimeType":"text/plain","data":"Hello World"}
+",
+  "0:"Hello!"
+",
+  "k:{"mimeType":"image/jpeg","data":"QkFVRw=="}
+",
+  "e:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10},"isContinued":false}
+",
+  "d:{"finishReason":"stop","usage":{"promptTokens":3,"completionTokens":10}}
+",
+]
+`;
+
 exports[`streamText > result.toDataStream > should send reasoning content when sendReasoning is true 1`] = `
 [
   "f:{"messageId":"msg-0"}
@@ -4108,9 +4625,15 @@ exports[`streamText > result.toDataStream > should send reasoning content when s
 ",
   "g:" with witty banter. "
 ",
+  "j:{"signature":"1234567890"}
+",
+  "i:{"data":"redacted-reasoning-data"}
+",
   "g:"Once the user has relaxed,"
 ",
   "g:" I will pry for valuable information."
+",
+  "j:{"signature":"1234567890"}
 ",
   "0:"Hi"
 ",

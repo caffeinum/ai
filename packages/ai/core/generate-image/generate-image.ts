@@ -1,13 +1,17 @@
-import { ImageModelV1, JSONValue } from '@ai-sdk/provider';
+import { AISDKError, ImageModelV1, JSONValue } from '@ai-sdk/provider';
+import { NoImageGeneratedError } from '../../errors/no-image-generated-error';
 import {
-  convertBase64ToUint8Array,
-  convertUint8ArrayToBase64,
-} from '@ai-sdk/provider-utils';
+  DefaultGeneratedFile,
+  GeneratedFile,
+} from '../generate-text/generated-file';
 import { prepareRetries } from '../prompt/prepare-retries';
 import { ImageGenerationWarning } from '../types/image-model';
-import { GeneratedImage, GenerateImageResult } from './generate-image-result';
-import { NoImageGeneratedError } from '../../errors/no-image-generated-error';
 import { ImageModelResponseMetadata } from '../types/image-model-response-metadata';
+import { GenerateImageResult } from './generate-image-result';
+import {
+  detectMimeType,
+  imageMimeTypeSignatures,
+} from '../util/detect-mimetype';
 
 /**
 Generates images using an image model.
@@ -37,9 +41,6 @@ export async function generateImage({
   maxRetries: maxRetriesArg,
   abortSignal,
   headers,
-  _internal = {
-    currentDate: () => new Date(),
-  },
 }: {
   /**
 The image model to use.
@@ -104,13 +105,6 @@ Additional headers to include in the request.
 Only applicable for HTTP-based providers.
  */
   headers?: Record<string, string>;
-
-  /**
-   * Internal. For test use only. May change without notice.
-   */
-  _internal?: {
-    currentDate?: () => Date;
-  };
 }): Promise<GenerateImageResult> {
   const { retry } = prepareRetries({ maxRetries: maxRetriesArg });
 
@@ -146,12 +140,22 @@ Only applicable for HTTP-based providers.
   );
 
   // collect result images, warnings, and response metadata
-  const images: Array<DefaultGeneratedImage> = [];
+  const images: Array<DefaultGeneratedFile> = [];
   const warnings: Array<ImageGenerationWarning> = [];
   const responses: Array<ImageModelResponseMetadata> = [];
   for (const result of results) {
     images.push(
-      ...result.images.map(image => new DefaultGeneratedImage({ image })),
+      ...result.images.map(
+        image =>
+          new DefaultGeneratedFile({
+            data: image,
+            mimeType:
+              detectMimeType({
+                data: image,
+                signatures: imageMimeTypeSignatures,
+              }) ?? 'image/png',
+          }),
+      ),
     );
     warnings.push(...result.warnings);
     responses.push(result.response);
@@ -165,12 +169,12 @@ Only applicable for HTTP-based providers.
 }
 
 class DefaultGenerateImageResult implements GenerateImageResult {
-  readonly images: Array<GeneratedImage>;
+  readonly images: Array<GeneratedFile>;
   readonly warnings: Array<ImageGenerationWarning>;
   readonly responses: Array<ImageModelResponseMetadata>;
 
   constructor(options: {
-    images: Array<DefaultGeneratedImage>;
+    images: Array<GeneratedFile>;
     warnings: Array<ImageGenerationWarning>;
     responses: Array<ImageModelResponseMetadata>;
   }) {
@@ -181,33 +185,5 @@ class DefaultGenerateImageResult implements GenerateImageResult {
 
   get image() {
     return this.images[0];
-  }
-}
-
-class DefaultGeneratedImage implements GeneratedImage {
-  private base64Data: string | undefined;
-  private uint8ArrayData: Uint8Array | undefined;
-
-  constructor({ image }: { image: string | Uint8Array }) {
-    const isUint8Array = image instanceof Uint8Array;
-
-    this.base64Data = isUint8Array ? undefined : image;
-    this.uint8ArrayData = isUint8Array ? image : undefined;
-  }
-
-  // lazy conversion with caching to avoid unnecessary conversion overhead:
-  get base64() {
-    if (this.base64Data == null) {
-      this.base64Data = convertUint8ArrayToBase64(this.uint8ArrayData!);
-    }
-    return this.base64Data;
-  }
-
-  // lazy conversion with caching to avoid unnecessary conversion overhead:
-  get uint8Array() {
-    if (this.uint8ArrayData == null) {
-      this.uint8ArrayData = convertBase64ToUint8Array(this.base64Data!);
-    }
-    return this.uint8ArrayData;
   }
 }

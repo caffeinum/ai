@@ -7,7 +7,10 @@ import {
 } from '@ai-sdk/provider';
 import { download } from '../../util/download';
 import { CoreMessage } from '../prompt/message';
-import { detectImageMimeType } from '../util/detect-image-mimetype';
+import {
+  detectMimeType,
+  imageMimeTypeSignatures,
+} from '../util/detect-mimetype';
 import { FilePart, ImagePart, TextPart } from './content-part';
 import {
   convertDataContentToBase64String,
@@ -110,13 +113,54 @@ export function convertToLanguageModelMessage(
             part => part.type !== 'text' || part.text !== '',
           )
           .map(part => {
-            const { experimental_providerMetadata, providerOptions, ...rest } =
-              part;
-            return {
-              ...rest,
-              providerMetadata:
-                providerOptions ?? experimental_providerMetadata,
-            };
+            const providerOptions =
+              part.providerOptions ?? part.experimental_providerMetadata;
+
+            switch (part.type) {
+              case 'file': {
+                return {
+                  type: 'file',
+                  data:
+                    part.data instanceof URL
+                      ? part.data
+                      : convertDataContentToBase64String(part.data),
+                  filename: part.filename,
+                  mimeType: part.mimeType,
+                  providerMetadata: providerOptions,
+                };
+              }
+              case 'reasoning': {
+                return {
+                  type: 'reasoning',
+                  text: part.text,
+                  signature: part.signature,
+                  providerMetadata: providerOptions,
+                };
+              }
+              case 'redacted-reasoning': {
+                return {
+                  type: 'redacted-reasoning',
+                  data: part.data,
+                  providerMetadata: providerOptions,
+                };
+              }
+              case 'text': {
+                return {
+                  type: 'text' as const,
+                  text: part.text,
+                  providerMetadata: providerOptions,
+                };
+              }
+              case 'tool-call': {
+                return {
+                  type: 'tool-call' as const,
+                  toolCallId: part.toolCallId,
+                  toolName: part.toolName,
+                  args: part.args,
+                  providerMetadata: providerOptions,
+                };
+              }
+            }
           }),
         providerMetadata:
           message.providerOptions ?? message.experimental_providerMetadata,
@@ -225,7 +269,8 @@ function convertPartToLanguageModelPart(
     return {
       type: 'text',
       text: part.text,
-      providerMetadata: part.experimental_providerMetadata,
+      providerMetadata:
+        part.providerOptions ?? part.experimental_providerMetadata,
     };
   }
 
@@ -299,13 +344,18 @@ function convertPartToLanguageModelPart(
       // When detection fails, use provided mimetype.
 
       if (normalizedData instanceof Uint8Array) {
-        mimeType = detectImageMimeType(normalizedData) ?? mimeType;
+        mimeType =
+          detectMimeType({
+            data: normalizedData,
+            signatures: imageMimeTypeSignatures,
+          }) ?? mimeType;
       }
       return {
         type: 'image',
         image: normalizedData,
         mimeType,
-        providerMetadata: part.experimental_providerMetadata,
+        providerMetadata:
+          part.providerOptions ?? part.experimental_providerMetadata,
       };
     }
 
@@ -321,8 +371,10 @@ function convertPartToLanguageModelPart(
           normalizedData instanceof Uint8Array
             ? convertDataContentToBase64String(normalizedData)
             : normalizedData,
+        filename: part.filename,
         mimeType,
-        providerMetadata: part.experimental_providerMetadata,
+        providerMetadata:
+          part.providerOptions ?? part.experimental_providerMetadata,
       };
     }
   }

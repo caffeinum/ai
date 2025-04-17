@@ -85,8 +85,23 @@ export type UseChatHelpers = {
     event?: { preventDefault?: () => void },
     chatRequestOptions?: ChatRequestOptions,
   ) => void;
-  /** Whether the API request is in progress */
+
+  /**
+   * Whether the API request is in progress
+   *
+   * @deprecated use `status` instead
+   */
   isLoading: Accessor<boolean>;
+
+  /**
+   * Hook status:
+   *
+   * - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
+   * - `streaming`: The response is actively streaming in from the API, receiving chunks of data.
+   * - `ready`: The full response has been received and processed; a new user message can be submitted.
+   * - `error`: An error occurred during the API request, preventing successful completion.
+   */
+  status: Accessor<'submitted' | 'streaming' | 'ready' | 'error'>;
 
   /** Additional data added on the server via StreamData */
   data: Accessor<JSONValue[] | undefined>;
@@ -146,6 +161,9 @@ By default, it's set to 1, which means that only a single LLM call is made.
   }) => unknown;
 };
 
+/**
+ * @deprecated `@ai-sdk/solid` has been deprecated and will be removed in AI SDK 5.
+ */
 export function useChat(
   rawUseChatOptions: UseChatOptions | Accessor<UseChatOptions> = {},
 ): UseChatHelpers {
@@ -188,7 +206,9 @@ export function useChat(
   const [streamData, setStreamData] = createSignal<JSONValue[] | undefined>(
     undefined,
   );
-  const [isLoading, setIsLoading] = createSignal(false);
+  const [status, setStatus] = createSignal<
+    'submitted' | 'streaming' | 'ready' | 'error'
+  >('ready');
 
   let messagesRef: UIMessage[] = fillMessageParts(_messages()) || [];
   createEffect(() => {
@@ -211,15 +231,15 @@ export function useChat(
   });
 
   const triggerRequest = async (chatRequest: ChatRequest) => {
+    setError(undefined);
+    setStatus('submitted');
+
     const messageCount = messagesRef.length;
     const maxStep = extractMaxToolInvocationStep(
       chatRequest.messages[chatRequest.messages.length - 1]?.toolInvocations,
     );
 
     try {
-      setError(undefined);
-      setIsLoading(true);
-
       abortController = new AbortController();
 
       const streamProtocol = useChatOptions().streamProtocol?.() ?? 'data';
@@ -298,6 +318,8 @@ export function useChat(
         },
         onResponse,
         onUpdate({ message, data, replaceLastMessage }) {
+          setStatus('streaming');
+
           mutate([
             ...(replaceLastMessage
               ? chatMessages.slice(0, chatMessages.length - 1)
@@ -317,10 +339,12 @@ export function useChat(
       });
 
       abortController = null;
+      setStatus('ready');
     } catch (err) {
       // Ignore abort errors as they are expected.
       if ((err as any).name === 'AbortError') {
         abortController = null;
+        setStatus('ready');
         return null;
       }
 
@@ -330,8 +354,7 @@ export function useChat(
       }
 
       setError(err as Error);
-    } finally {
-      setIsLoading(false);
+      setStatus('error');
     }
 
     const maxSteps = useChatOptions().maxSteps?.() ?? 1;
@@ -493,12 +516,21 @@ export function useChat(
 
     mutate(currentMessages);
 
+    // when the request is ongoing, the auto-submit will be triggered after the request is finished
+    if (status() === 'submitted' || status() === 'streaming') {
+      return;
+    }
+
     // auto-submit when all tool calls in the last assistant message have results:
     const lastMessage = currentMessages[currentMessages.length - 1];
     if (isAssistantMessageWithCompletedToolCalls(lastMessage)) {
       triggerRequest({ messages: currentMessages });
     }
   };
+
+  const isLoading = createMemo(
+    () => status() === 'submitted' || status() === 'streaming',
+  );
 
   return {
     // TODO next major release: replace with direct message store access (breaking change)
@@ -514,6 +546,7 @@ export function useChat(
     handleInputChange,
     handleSubmit,
     isLoading,
+    status,
     data: streamData,
     setData,
     addToolResult,

@@ -1,5 +1,109 @@
 # @ai-sdk/provider-utils
 
+## 2.2.7
+
+### Patch Changes
+
+- Updated dependencies [beef951]
+  - @ai-sdk/provider@1.1.3
+
+## 2.2.6
+
+### Patch Changes
+
+- Updated dependencies [013faa8]
+  - @ai-sdk/provider@1.1.2
+
+## 2.2.5
+
+### Patch Changes
+
+- c21fa6d: feat: add transcription with experimental_transcribe
+- Updated dependencies [c21fa6d]
+  - @ai-sdk/provider@1.1.1
+
+## 2.2.4
+
+### Patch Changes
+
+- 2c19b9a: feat(provider-utils): add TestServerCall#requestCredentials
+
+## 2.2.3
+
+### Patch Changes
+
+- 28be004: chore (provider-utils): add error method to TestStreamController
+
+## 2.2.2
+
+### Patch Changes
+
+- b01120e: chore (provider-utils): update unified test server
+
+## 2.2.1
+
+### Patch Changes
+
+- f10f0fa: fix (provider-utils): improve event source stream parsing performance
+
+## 2.2.0
+
+### Minor Changes
+
+- 5bc638d: AI SDK 4.2
+
+### Patch Changes
+
+- Updated dependencies [5bc638d]
+  - @ai-sdk/provider@1.1.0
+
+## 2.1.15
+
+### Patch Changes
+
+- d0c4659: feat (provider-utils): parseProviderOptions function
+
+## 2.1.14
+
+### Patch Changes
+
+- Updated dependencies [0bd5bc6]
+  - @ai-sdk/provider@1.0.12
+
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies [2e1101a]
+  - @ai-sdk/provider@1.0.11
+
+## 2.1.12
+
+### Patch Changes
+
+- 1531959: feat (provider-utils): add readable-stream to unified test server
+
+## 2.1.11
+
+### Patch Changes
+
+- Updated dependencies [e1d3d42]
+  - @ai-sdk/provider@1.0.10
+
+## 2.1.10
+
+### Patch Changes
+
+- Updated dependencies [ddf9740]
+  - @ai-sdk/provider@1.0.9
+
+## 2.1.9
+
+### Patch Changes
+
+- Updated dependencies [2761f06]
+  - @ai-sdk/provider@1.0.8
+
 ## 2.1.8
 
 ### Patch Changes

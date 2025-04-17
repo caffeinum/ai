@@ -1,5 +1,283 @@
 # @ai-sdk/google-vertex
 
+## 2.2.15
+
+### Patch Changes
+
+- Updated dependencies [beef951]
+  - @ai-sdk/provider@1.1.3
+  - @ai-sdk/anthropic@1.2.10
+  - @ai-sdk/google@1.2.11
+  - @ai-sdk/provider-utils@2.2.7
+
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies [aeba38e]
+  - @ai-sdk/anthropic@1.2.9
+
+## 2.2.13
+
+### Patch Changes
+
+- Updated dependencies [013faa8]
+  - @ai-sdk/provider@1.1.2
+  - @ai-sdk/anthropic@1.2.8
+  - @ai-sdk/google@1.2.10
+  - @ai-sdk/provider-utils@2.2.6
+
+## 2.2.12
+
+### Patch Changes
+
+- Updated dependencies [c21fa6d]
+  - @ai-sdk/provider-utils@2.2.5
+  - @ai-sdk/provider@1.1.1
+  - @ai-sdk/anthropic@1.2.7
+  - @ai-sdk/google@1.2.9
+
+## 2.2.11
+
+### Patch Changes
+
+- Updated dependencies [1e8e66d]
+  - @ai-sdk/google@1.2.8
+
+## 2.2.10
+
+### Patch Changes
+
+- 1789884: feat: add provider option schemas for vertex imagegen and google genai
+- Updated dependencies [1789884]
+  - @ai-sdk/google@1.2.7
+
+## 2.2.9
+
+### Patch Changes
+
+- Updated dependencies [2c19b9a]
+  - @ai-sdk/provider-utils@2.2.4
+  - @ai-sdk/anthropic@1.2.6
+  - @ai-sdk/google@1.2.6
+
+## 2.2.8
+
+### Patch Changes
+
+- 292f543: fix (provider/google-vertex): fix anthropic support for image urls in messages
+- Updated dependencies [292f543]
+  - @ai-sdk/anthropic@1.2.5
+
+## 2.2.7
+
+### Patch Changes
+
+- Updated dependencies [28be004]
+  - @ai-sdk/provider-utils@2.2.3
+  - @ai-sdk/anthropic@1.2.4
+  - @ai-sdk/google@1.2.5
+
+## 2.2.6
+
+### Patch Changes
+
+- Updated dependencies [b01120e]
+  - @ai-sdk/provider-utils@2.2.2
+  - @ai-sdk/anthropic@1.2.3
+  - @ai-sdk/google@1.2.4
+
+## 2.2.5
+
+### Patch Changes
+
+- 9507f7e: fix (provider/google-vertex): pass through auth options for vertex provider
+
+## 2.2.4
+
+### Patch Changes
+
+- Updated dependencies [aeaa92b]
+  - @ai-sdk/anthropic@1.2.2
+
+## 2.2.3
+
+### Patch Changes
+
+- Updated dependencies [871df87]
+  - @ai-sdk/google@1.2.3
+
+## 2.2.2
+
+### Patch Changes
+
+- Updated dependencies [f10f0fa]
+  - @ai-sdk/provider-utils@2.2.1
+  - @ai-sdk/anthropic@1.2.1
+  - @ai-sdk/google@1.2.2
+
+## 2.2.1
+
+### Patch Changes
+
+- Updated dependencies [994a13b]
+  - @ai-sdk/google@1.2.1
+
+## 2.2.0
+
+### Minor Changes
+
+- 5bc638d: AI SDK 4.2
+
+### Patch Changes
+
+- Updated dependencies [5bc638d]
+  - @ai-sdk/anthropic@1.2.0
+  - @ai-sdk/google@1.2.0
+  - @ai-sdk/provider@1.1.0
+  - @ai-sdk/provider-utils@2.2.0
+
+## 2.1.31
+
+### Patch Changes
+
+- Updated dependencies [d0c4659]
+  - @ai-sdk/provider-utils@2.1.15
+  - @ai-sdk/google@1.1.27
+  - @ai-sdk/anthropic@1.1.19
+
+## 2.1.30
+
+### Patch Changes
+
+- Updated dependencies [0bd5bc6]
+  - @ai-sdk/provider@1.0.12
+  - @ai-sdk/google@1.1.26
+  - @ai-sdk/anthropic@1.1.18
+  - @ai-sdk/provider-utils@2.1.14
+
+## 2.1.29
+
+### Patch Changes
+
+- Updated dependencies [2e1101a]
+  - @ai-sdk/provider@1.0.11
+  - @ai-sdk/anthropic@1.1.17
+  - @ai-sdk/google@1.1.25
+  - @ai-sdk/provider-utils@2.1.13
+
+## 2.1.28
+
+### Patch Changes
+
+- Updated dependencies [5261762]
+  - @ai-sdk/google@1.1.24
+
+## 2.1.27
+
+### Patch Changes
+
+- Updated dependencies [413f5a7]
+  - @ai-sdk/google@1.1.23
+
+## 2.1.26
+
+### Patch Changes
+
+- Updated dependencies [62f46fd]
+  - @ai-sdk/google@1.1.22
+
+## 2.1.25
+
+### Patch Changes
+
+- Updated dependencies [1531959]
+  - @ai-sdk/provider-utils@2.1.12
+  - @ai-sdk/anthropic@1.1.16
+  - @ai-sdk/google@1.1.21
+
+## 2.1.24
+
+### Patch Changes
+
+- Updated dependencies [e1d3d42]
+  - @ai-sdk/anthropic@1.1.15
+  - @ai-sdk/provider@1.0.10
+  - @ai-sdk/google@1.1.20
+  - @ai-sdk/provider-utils@2.1.11
+
+## 2.1.23
+
+### Patch Changes
+
+- Updated dependencies [2c27583]
+- Updated dependencies [0e8b66c]
+  - @ai-sdk/google@1.1.19
+  - @ai-sdk/anthropic@1.1.14
+
+## 2.1.22
+
+### Patch Changes
+
+- Updated dependencies [5c8f512]
+  - @ai-sdk/google@1.1.18
+
+## 2.1.21
+
+### Patch Changes
+
+- Updated dependencies [3004b14]
+  - @ai-sdk/anthropic@1.1.13
+
+## 2.1.20
+
+### Patch Changes
+
+- Updated dependencies [b3e5a15]
+  - @ai-sdk/anthropic@1.1.12
+
+## 2.1.19
+
+### Patch Changes
+
+- Updated dependencies [00276ae]
+- Updated dependencies [a4f8714]
+  - @ai-sdk/anthropic@1.1.11
+
+## 2.1.18
+
+### Patch Changes
+
+- Updated dependencies [ddf9740]
+  - @ai-sdk/anthropic@1.1.10
+  - @ai-sdk/provider@1.0.9
+  - @ai-sdk/google@1.1.17
+  - @ai-sdk/provider-utils@2.1.10
+
+## 2.1.17
+
+### Patch Changes
+
+- Updated dependencies [1b2e2a0]
+  - @ai-sdk/google@1.1.16
+
+## 2.1.16
+
+### Patch Changes
+
+- Updated dependencies [2761f06]
+  - @ai-sdk/provider@1.0.8
+  - @ai-sdk/anthropic@1.1.9
+  - @ai-sdk/google@1.1.15
+  - @ai-sdk/provider-utils@2.1.9
+
+## 2.1.15
+
+### Patch Changes
+
+- Updated dependencies [08a3641]
+  - @ai-sdk/google@1.1.14
+
 ## 2.1.14
 
 ### Patch Changes

@@ -42,8 +42,8 @@ async function simulateFlightServerRender(node: React.ReactNode) {
         typeof children === 'string'
           ? children
           : Array.isArray(children)
-          ? children.map(traverse)
-          : await traverse(children),
+            ? children.map(traverse)
+            : await traverse(children),
     };
   }
 
@@ -192,7 +192,7 @@ describe('rsc - streamUI() onFinish callback', () => {
   beforeEach(async () => {
     const ui = await streamUI({
       model: mockToolModel,
-      messages: [],
+      prompt: '',
       tools: {
         tool1: {
           description: 'test tool 1',

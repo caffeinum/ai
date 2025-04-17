@@ -188,7 +188,7 @@ This page utilizes the `useChat` hook, which will, by default, use the `POST` AP
 - `messages` - the current chat messages (an array of objects with `id`, `role`, and `content` properties).
 - `input` - the current value of the user's input field.
 - `handleInputChange` and `handleSubmit` - functions to handle user interactions (typing into the input field and submitting the form, respectively).
-- `isLoading` - boolean that indicates whether the API request is in progress.
+- `status` - the status of the API request.
 
 ## Add Image Upload
 
@@ -274,7 +274,7 @@ In this code, you:
 
 1. Create state to hold the files and create a ref to the file input field.
 2. Display the "uploaded" files in the UI.
-3. Update the `onSubmit` function, to call the `handleSubmit` function manually, passing the the files as an option using the `experimental_attachments` key.
+3. Update the `onSubmit` function, to call the `handleSubmit` function manually, passing the files as an option using the `experimental_attachments` key.
 4. Add a file input field to the form, including an `onChange` handler to handle updating the files state.
 
 ## Running Your Application
@@ -307,7 +307,7 @@ ANTHROPIC_API_KEY=xxxxxxxxx
 ```tsx filename="app/api/chat/route.ts" highlight="2,10-15,18-20"
 import { openai } from '@ai-sdk/openai';
 import { anthropic } from '@ai-sdk/anthropic';
-import { streamText } from 'ai';
+import { streamText, type Message } from 'ai';
 
 export const maxDuration = 30;
 

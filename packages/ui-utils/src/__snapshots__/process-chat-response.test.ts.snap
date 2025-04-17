@@ -381,6 +381,134 @@ exports[`scenario: onToolCall is executed > should call the update function twic
 ]
 `;
 
+exports[`scenario: server provides file parts > should call the onFinish function with the correct arguments 1`] = `
+[
+  {
+    "finishReason": "stop",
+    "message": {
+      "content": "Here is a file:And another one:",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "id-0",
+      "parts": [
+        {
+          "text": "Here is a file:And another one:",
+          "type": "text",
+        },
+        {
+          "data": "Hello World",
+          "mimeType": "text/plain",
+          "type": "file",
+        },
+        {
+          "data": "{"key": "value"}",
+          "mimeType": "application/json",
+          "type": "file",
+        },
+      ],
+      "role": "assistant",
+    },
+    "usage": {
+      "completionTokens": 7,
+      "promptTokens": 14,
+      "totalTokens": 21,
+    },
+  },
+]
+`;
+
+exports[`scenario: server provides file parts > should call the update function with the correct arguments 1`] = `
+[
+  {
+    "data": [],
+    "message": {
+      "content": "Here is a file:",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "id-0",
+      "parts": [
+        {
+          "text": "Here is a file:",
+          "type": "text",
+        },
+      ],
+      "revisionId": "id-1",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "Here is a file:",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "id-0",
+      "parts": [
+        {
+          "text": "Here is a file:",
+          "type": "text",
+        },
+        {
+          "data": "Hello World",
+          "mimeType": "text/plain",
+          "type": "file",
+        },
+      ],
+      "revisionId": "id-2",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "Here is a file:And another one:",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "id-0",
+      "parts": [
+        {
+          "text": "Here is a file:And another one:",
+          "type": "text",
+        },
+        {
+          "data": "Hello World",
+          "mimeType": "text/plain",
+          "type": "file",
+        },
+      ],
+      "revisionId": "id-3",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "Here is a file:And another one:",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "id-0",
+      "parts": [
+        {
+          "text": "Here is a file:And another one:",
+          "type": "text",
+        },
+        {
+          "data": "Hello World",
+          "mimeType": "text/plain",
+          "type": "file",
+        },
+        {
+          "data": "{"key": "value"}",
+          "mimeType": "application/json",
+          "type": "file",
+        },
+      ],
+      "revisionId": "id-4",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+]
+`;
+
 exports[`scenario: server provides message ids > should call the onFinish function with the correct arguments 1`] = `
 [
   {
@@ -390,6 +518,9 @@ exports[`scenario: server provides message ids > should call the onFinish functi
       "createdAt": 2023-01-01T00:00:00.000Z,
       "id": "step_123",
       "parts": [
+        {
+          "type": "step-start",
+        },
         {
           "text": "Hello, world!",
           "type": "text",
@@ -411,16 +542,35 @@ exports[`scenario: server provides message ids > should call the update function
   {
     "data": [],
     "message": {
+      "content": "",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "step_123",
+      "parts": [
+        {
+          "type": "step-start",
+        },
+      ],
+      "revisionId": "id-1",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
       "content": "Hello, ",
       "createdAt": 2023-01-01T00:00:00.000Z,
       "id": "step_123",
       "parts": [
         {
+          "type": "step-start",
+        },
+        {
           "text": "Hello, ",
           "type": "text",
         },
       ],
-      "revisionId": "id-1",
+      "revisionId": "id-2",
       "role": "assistant",
     },
     "replaceLastMessage": false,
@@ -433,11 +583,14 @@ exports[`scenario: server provides message ids > should call the update function
       "id": "step_123",
       "parts": [
         {
+          "type": "step-start",
+        },
+        {
           "text": "Hello, world!",
           "type": "text",
         },
       ],
-      "revisionId": "id-2",
+      "revisionId": "id-3",
       "role": "assistant",
     },
     "replaceLastMessage": false,
@@ -455,6 +608,25 @@ exports[`scenario: server provides reasoning > should call the onFinish function
       "id": "step_123",
       "parts": [
         {
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+            {
+              "data": "redacted-data",
+              "type": "redacted",
+            },
+            {
+              "signature": "abc123",
+              "text": "Once the user has relaxed, I will pry for valuable information.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
           "type": "reasoning",
         },
@@ -485,11 +657,9 @@ exports[`scenario: server provides reasoning > should call the update function w
       "id": "step_123",
       "parts": [
         {
-          "reasoning": "I will open the conversation",
-          "type": "reasoning",
+          "type": "step-start",
         },
       ],
-      "reasoning": "I will open the conversation",
       "revisionId": "id-1",
       "role": "assistant",
     },
@@ -503,11 +673,20 @@ exports[`scenario: server provides reasoning > should call the update function w
       "id": "step_123",
       "parts": [
         {
-          "reasoning": "I will open the conversation with witty banter. ",
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "text": "I will open the conversation",
+              "type": "text",
+            },
+          ],
+          "reasoning": "I will open the conversation",
           "type": "reasoning",
         },
       ],
-      "reasoning": "I will open the conversation with witty banter. ",
+      "reasoning": "I will open the conversation",
       "revisionId": "id-2",
       "role": "assistant",
     },
@@ -521,11 +700,20 @@ exports[`scenario: server provides reasoning > should call the update function w
       "id": "step_123",
       "parts": [
         {
-          "reasoning": "I will open the conversation with witty banter. Once the user has relaxed,",
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+          ],
+          "reasoning": "I will open the conversation with witty banter. ",
           "type": "reasoning",
         },
       ],
-      "reasoning": "I will open the conversation with witty banter. Once the user has relaxed,",
+      "reasoning": "I will open the conversation with witty banter. ",
       "revisionId": "id-3",
       "role": "assistant",
     },
@@ -539,12 +727,98 @@ exports[`scenario: server provides reasoning > should call the update function w
       "id": "step_123",
       "parts": [
         {
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+            {
+              "data": "redacted-data",
+              "type": "redacted",
+            },
+          ],
+          "reasoning": "I will open the conversation with witty banter. ",
+          "type": "reasoning",
+        },
+      ],
+      "reasoning": "I will open the conversation with witty banter. ",
+      "revisionId": "id-4",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "step_123",
+      "parts": [
+        {
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+            {
+              "data": "redacted-data",
+              "type": "redacted",
+            },
+            {
+              "text": "Once the user has relaxed,",
+              "type": "text",
+            },
+          ],
+          "reasoning": "I will open the conversation with witty banter. Once the user has relaxed,",
+          "type": "reasoning",
+        },
+      ],
+      "reasoning": "I will open the conversation with witty banter. Once the user has relaxed,",
+      "revisionId": "id-5",
+      "role": "assistant",
+    },
+    "replaceLastMessage": false,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "",
+      "createdAt": 2023-01-01T00:00:00.000Z,
+      "id": "step_123",
+      "parts": [
+        {
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+            {
+              "data": "redacted-data",
+              "type": "redacted",
+            },
+            {
+              "text": "Once the user has relaxed, I will pry for valuable information.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
           "type": "reasoning",
         },
       ],
       "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
-      "revisionId": "id-4",
+      "revisionId": "id-6",
       "role": "assistant",
     },
     "replaceLastMessage": false,
@@ -557,6 +831,25 @@ exports[`scenario: server provides reasoning > should call the update function w
       "id": "step_123",
       "parts": [
         {
+          "type": "step-start",
+        },
+        {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will open the conversation with witty banter. ",
+              "type": "text",
+            },
+            {
+              "data": "redacted-data",
+              "type": "redacted",
+            },
+            {
+              "signature": "abc123",
+              "text": "Once the user has relaxed, I will pry for valuable information.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
           "type": "reasoning",
         },
@@ -566,7 +859,7 @@ exports[`scenario: server provides reasoning > should call the update function w
         },
       ],
       "reasoning": "I will open the conversation with witty banter. Once the user has relaxed, I will pry for valuable information.",
-      "revisionId": "id-5",
+      "revisionId": "id-7",
       "role": "assistant",
     },
     "replaceLastMessage": false,
@@ -926,6 +1219,9 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
         {
+          "type": "step-start",
+        },
+        {
           "toolInvocation": {
             "args": {
               "city": "London",
@@ -1003,6 +1299,50 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
         {
+          "type": "step-start",
+        },
+      ],
+      "revisionId": "id-0",
+      "role": "assistant",
+      "toolInvocations": [
+        {
+          "args": {},
+          "result": {
+            "location": "Berlin",
+          },
+          "state": "result",
+          "step": 0,
+          "toolCallId": "tool-call-id-original",
+          "toolName": "tool-name-original",
+        },
+      ],
+    },
+    "replaceLastMessage": true,
+  },
+  {
+    "data": [],
+    "message": {
+      "content": "",
+      "createdAt": 2023-01-02T00:00:00.000Z,
+      "id": "original-id",
+      "parts": [
+        {
+          "toolInvocation": {
+            "args": {},
+            "result": {
+              "location": "Berlin",
+            },
+            "state": "result",
+            "step": 0,
+            "toolCallId": "tool-call-id-original",
+            "toolName": "tool-name-original",
+          },
+          "type": "tool-invocation",
+        },
+        {
+          "type": "step-start",
+        },
+        {
           "toolInvocation": {
             "args": {
               "city": "London",
@@ -1015,7 +1355,7 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
       ],
-      "revisionId": "id-0",
+      "revisionId": "id-1",
       "role": "assistant",
       "toolInvocations": [
         {
@@ -1062,6 +1402,9 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
         {
+          "type": "step-start",
+        },
+        {
           "toolInvocation": {
             "args": {
               "city": "London",
@@ -1077,7 +1420,7 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
       ],
-      "revisionId": "id-1",
+      "revisionId": "id-2",
       "role": "assistant",
       "toolInvocations": [
         {
@@ -1127,6 +1470,9 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "tool-invocation",
         },
         {
+          "type": "step-start",
+        },
+        {
           "toolInvocation": {
             "args": {
               "city": "London",
@@ -1146,7 +1492,7 @@ exports[`scenario: server-side tool roundtrip with existing assistant message > 
           "type": "text",
         },
       ],
-      "revisionId": "id-2",
+      "revisionId": "id-3",
       "role": "assistant",
       "toolInvocations": [
         {
@@ -1188,6 +1534,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1207,6 +1560,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
           "type": "tool-invocation",
         },
         {
+          "details": [
+            {
+              "signature": "abc123",
+              "text": "I know know the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I know know the weather in London.",
           "type": "reasoning",
         },
@@ -1251,6 +1611,12 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "text": "I will ",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will ",
           "type": "reasoning",
         },
@@ -1269,6 +1635,12 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1287,6 +1659,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1328,6 +1707,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1375,6 +1761,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1394,6 +1787,12 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
           "type": "tool-invocation",
         },
         {
+          "details": [
+            {
+              "text": "I know know the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I know know the weather in London.",
           "type": "reasoning",
         },
@@ -1426,6 +1825,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
       "id": "id-0",
       "parts": [
         {
+          "details": [
+            {
+              "signature": "1234567890",
+              "text": "I will use a tool to get the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I will use a tool to get the weather in London.",
           "type": "reasoning",
         },
@@ -1445,6 +1851,13 @@ exports[`scenario: server-side tool roundtrip with multiple assistant reasoning 
           "type": "tool-invocation",
         },
         {
+          "details": [
+            {
+              "signature": "abc123",
+              "text": "I know know the weather in London.",
+              "type": "text",
+            },
+          ],
           "reasoning": "I know know the weather in London.",
           "type": "reasoning",
         },

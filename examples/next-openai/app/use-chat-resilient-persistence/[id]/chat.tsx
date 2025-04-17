@@ -1,13 +1,13 @@
 'use client';
 
-import { createIdGenerator } from 'ai';
 import { Message, useChat } from '@ai-sdk/react';
+import { createIdGenerator } from 'ai';
 
 export default function Chat({
   id,
   initialMessages,
 }: { id?: string | undefined; initialMessages?: Message[] } = {}) {
-  const { input, isLoading, handleInputChange, handleSubmit, messages } =
+  const { input, status, handleInputChange, handleSubmit, messages, stop } =
     useChat({
       api: '/api/use-chat-resilient-persistence',
       id, // use the provided chatId
@@ -31,8 +31,17 @@ export default function Chat({
           value={input}
           placeholder="Say something..."
           onChange={handleInputChange}
-          disabled={isLoading}
+          disabled={status !== 'ready'}
         />
+        {status === 'streaming' && (
+          <button
+            className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+            type="submit"
+            onClick={stop}
+          >
+            Stop
+          </button>
+        )}
       </form>
     </div>
   );
